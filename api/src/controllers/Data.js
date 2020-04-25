@@ -12,18 +12,18 @@ export const listItems = async ({ page = 1, perPage = 10 }) => ({
   count: await DataModel.countDocuments(),
 });
 
-export const getItem = async (itemId) => {
-  return await DataModel.findOne({id: itemId});
+export const getItem = async (id) => {
+  return await DataModel.findOne({ id });
 }
 
-export const insertItem = async () => {
-
+export const insertItem = async ({ city, start_date, end_date, price, status, color }) => {
+  return await DataModel.create({ id: await getNextID(), city, start_date, end_date, price, status, color });
 }
 
-export const updateItem = async () => {
-
+export const updateItem = async (id, { city, start_date, end_date, price, status, color }) => {
+  return !!(await DataModel.findOneAndUpdate({ id }, { city, start_date, end_date, price, status, color }));
 }
 
-export const deleteitem = async () => {
-
+export const deleteitem = async (id) => {
+  return !!(await DataModel.findOneAndDelete({ id }));
 }

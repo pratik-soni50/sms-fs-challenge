@@ -1,9 +1,11 @@
 import { Schema, model } from 'mongoose';
+import statusEnum from '../utils/statusEnum';
 
 const dataSchema = new Schema({
   id: {
     type: Number,
     unique: true,
+    index: true,
     autoIncrement: true,
   },
   city: String,
@@ -12,16 +14,7 @@ const dataSchema = new Schema({
   price: Number,
   status: {
     type: String,
-    enum: [
-      'Never',
-      'Once',
-      'Often',
-      'Seldom',
-      'Yearly',
-      'Monthly',
-      'Weekly',
-      'Daily',
-    ],
+    enum: statusEnum,
   },
   color: String,
 }, { id: false });
