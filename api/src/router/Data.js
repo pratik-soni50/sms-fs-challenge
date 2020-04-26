@@ -10,7 +10,7 @@ const handleInternalServerError = (req, res) => {
 
 dataRouter.get('/', async ({ query }, res) => {
   try {
-    res.json(await listItems(query));
+    res.json({result: await listItems(query), status: true});
   } catch {
     next();
   }
@@ -26,11 +26,8 @@ dataRouter.get('/:id', validateID, checkValidation, async ({ params: { id } }, r
 
 dataRouter.post('/', validateData, checkValidation, async ({ body }, res, next) => {
   try {
-    const data = await insertItem(body);
-    console.log(data);
-    res.json(data)
-  } catch(e) {
-    console.error(e);
+    res.json(await insertItem(body))
+  } catch {
     next();
   }
 }, handleInternalServerError);

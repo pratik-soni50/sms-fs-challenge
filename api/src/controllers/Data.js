@@ -7,8 +7,9 @@ const getNextID = async () => {
   }
 };
 
-export const listItems = async ({ page = 1, perPage = 10 }) => ({
-  list: await DataModel.find().limit(Number(perPage)).skip((page - 1) * perPage),
+export const listItems = async ({ page = 1, perPage = 10, order = 'asc', orderBy = 'id' }) => ({
+  items: await DataModel.find().limit(Number(perPage)).skip((page - 1) * perPage)
+    .sort({ [orderBy]: (order === 'asc' ? 1 : -1) }),
   count: await DataModel.countDocuments(),
 });
 
