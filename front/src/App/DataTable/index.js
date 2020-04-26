@@ -41,14 +41,15 @@ export default function DataTable() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { data, count, loading } = useSelector(state => state.getRows);
+  const { result } = useSelector(state => state.addEditRow);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [page, setPage] = React.useState(0);
   const [perPage, setperPage] = React.useState(10);
 
   useEffect(() => {
-    dispatch(getRows({ page: page + 1, perPage, order, orderBy }));
-  }, [order, orderBy, page, perPage])
+    !loading && dispatch(getRows({ page: page + 1, perPage, order, orderBy }));
+  }, [order, orderBy, page, perPage, result]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
