@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 const headCells = [
-  { id: 'city', numeric: false, disablePadding: true, label: 'City' },
+  { id: 'city', numeric: false, disablePadding: false, label: 'City' },
   { id: 'start_date', numeric: false, disablePadding: false, label: 'Start Date' },
   { id: 'end_date', numeric: false, disablePadding: false, label: 'End Date' },
   { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
@@ -44,6 +44,10 @@ function DataTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell
+          padding="default"
+          align="center"
+        >Action</TableCell>
       </TableRow>
     </TableHead>
   );

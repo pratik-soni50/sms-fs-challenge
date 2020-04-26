@@ -84,14 +84,8 @@ export default function DataTable() {
             <TableBody>
               {
                 data
-                  ? data.map((row, index) => <DataRow
-                    index={index}
-                    row={row}
-                    key={row._id}
-                  />)
-                  : <TableRow>
-                    <TableCell colSpan={6} />
-                  </TableRow>
+                  ? data.map(row => <DataRow row={row} key={row._id} />)
+                  : <TableRow><TableCell colSpan={6} /></TableRow>
               }
             </TableBody>
           </Table>

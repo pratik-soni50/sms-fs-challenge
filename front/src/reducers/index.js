@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import getRowsReducer from './getRowsReducer';
-
+import getRows from './getRowsReducer';
+import addEditRow from './addEditRowReducer';
 
 export default combineReducers({
-  getRows: getRowsReducer,
+  getRows,
+  addEditRow,
 });
