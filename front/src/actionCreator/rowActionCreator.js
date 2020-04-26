@@ -34,3 +34,8 @@ export const clearAddEditRow = payload => ({
   type: ACTIONS.CLEAR_ADD_EDIT_ROW,
   payload,
 });
+
+export const setEditData = payload => ({
+  type: ACTIONS.SET_EDIT_DATA,
+  payload,
+});

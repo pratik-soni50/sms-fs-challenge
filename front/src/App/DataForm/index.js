@@ -16,23 +16,24 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-export default function DataForm({ item }) {
+export default function DataForm() {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const { result, loading } = useSelector(state => state.addEditRow);
+  const { result, loading, item } = useSelector(state => state.addEditRow);
   const [city, setCity] = useState('');
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [price, setPrice] = useState('');
   const [status, setStatus] = useState('');
   const [color, setColor] = useState('');
+
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(addEditRow({
       id: item && item.id,
       city,
-      start_date: format(startDate, appConfig.DATE_FORMAT),
-      end_date: format(endDate, appConfig.DATE_FORMAT),
+      start_date: format(new Date(startDate), appConfig.DATE_FORMAT),
+      end_date: format(new Date(endDate), appConfig.DATE_FORMAT),
       price,
       status,
       color,
@@ -42,8 +43,8 @@ export default function DataForm({ item }) {
   useEffect(() => {
     if (item) {
       setCity(item.city || '');
-      setStartDate(item.StartDate || null);
-      setEndDate(item.setEndDate || null);
+      setStartDate(item.start_date || null);
+      setEndDate(item.end_date || null);
       setPrice(item.price || '');
       setStatus(item.status || '');
       setColor(item.color || '');
@@ -51,7 +52,7 @@ export default function DataForm({ item }) {
   }, [item]);
 
   useEffect(() => {
-    if (result && result.id) {
+    if (result && (result.id || item.id)) {
       setCity('');
       setStartDate(null);
       setEndDate(null);

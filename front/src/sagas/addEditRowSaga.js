@@ -5,7 +5,11 @@ import { rowAddedEdited } from '../actionCreator';
 
 export default function* addEditRowSaga({ payload }) {
   try {
-    const { data } = yield call(payload.id ? axios.put : axios.post, `${appConfig.API_URL}/data`, payload);
+    const { data } = yield call(
+      payload.id ? axios.put : axios.post,
+      `${appConfig.API_URL}/data/${payload.id || ''}`,
+      payload
+    );
     const { status, error, result } = data;
     yield put(rowAddedEdited({ error, result }));
     if (status) {

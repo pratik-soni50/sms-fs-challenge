@@ -4,6 +4,7 @@ const initialState = {
   result: null,
   error: null,
   loading: false,
+  item: null,
 };
 
 const addEditRowReducer = (state = initialState, { type, payload }) => {
@@ -21,6 +22,12 @@ const addEditRowReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: (payload && payload.error) || null,
       };
+
+    case ACTIONS.SET_EDIT_DATA:
+      return {
+        ...state,
+        item: payload,
+      }
 
     case ACTIONS.CLEAR_ADD_EDIT_ROW:
       return initialState;
