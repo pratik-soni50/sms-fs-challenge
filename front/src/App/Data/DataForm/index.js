@@ -112,7 +112,7 @@ export default function DataForm() {
           value={endDate}
           onChange={setEndDate}
           minDate={startDate}
-          minDateMessage="End Date should not aefore Start Date"
+          minDateMessage="End Date should not before Start Date"
           autoOk={true}
           TextFieldComponent={TextValidator}
           validators={['required']}

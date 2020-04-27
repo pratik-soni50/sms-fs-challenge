@@ -4,6 +4,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import HeaderBar from '../Component/Header';
 import Sidebar from '../Component/Sidebar';
 import Data from './Data';
+import Product from './Product';
+import Document from './Document';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +29,8 @@ export default function App() {
         <main className={classes.content}>
           <Switch>
             <Route path="/dashboard"><Data /></Route>
-            <Route path="/products">Products</Route>
-            <Route path="/documents">Documents</Route>
+            <Route path="/products"><Product /></Route>
+            <Route path="/documents"><Document /></Route>
             <Route exact path={`/`}><Redirect to="/dashboard" /></Route>
             <Route path={`*`}>404</Route>
           </Switch>

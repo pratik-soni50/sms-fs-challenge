@@ -103,7 +103,7 @@ export default function DataTable() {
               value={maxStart}
               onChange={setMaxStart}
               minDate={minStart}
-              minDateMessage="Max Date should not before min Date"
+              minDateMessage="Max Date should not before Min Date"
               autoOk={true}
             />
           </Grid>
@@ -125,7 +125,7 @@ export default function DataTable() {
               value={maxEnd}
               onChange={setMaxEnd}
               minDate={minEnd}
-              minDateMessage="Max Date should not before min Date"
+              minDateMessage="Max Date should not before Min Date"
               autoOk={true}
             />
           </Grid>
