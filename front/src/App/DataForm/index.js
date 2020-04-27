@@ -79,8 +79,8 @@ export default function DataForm() {
           label="City"
           value={city}
           onChange={e => setCity(e.target.value)}
-          validators={['required', 'trim']}
-          errorMessages={['This field is required', 'Only Space not allowed']}
+          validators={['required']}
+          errorMessages={['This field is required']}
         />
         <DatePicker
           disableToolbar
