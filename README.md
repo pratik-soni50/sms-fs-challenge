@@ -44,14 +44,14 @@ npm run start-build-api
 By this UI will run on port 8000
 
 ## Features
-Build with MERN stack
-RESTful API
-Sorteble List
-Create/Update Item form
-Delete Item functionality
+- Build with MERN stack
+- RESTful API
+- Sorteble List
+- Create/Update Item form
+- Delete Item functionality
 
 ## Upcoming Features
-Configurable Port
-Updated Validation
-UI Changes
-Notification
+- Configurable Port
+- Updated Validation
+- UI Changes
+- Notification
