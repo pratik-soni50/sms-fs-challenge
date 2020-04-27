@@ -13,8 +13,8 @@ import { DatePicker } from '@material-ui/pickers';
 
 import DataTableHead from './DataTableHead';
 import DataRow from './DataRow';
-import { getRows, clearDeleteRow } from '../../actionCreator';
-import appConfig from '../../appConfig';
+import { getRows, clearDeleteRow } from '../../../actionCreator';
+import appConfig from '../../../appConfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {

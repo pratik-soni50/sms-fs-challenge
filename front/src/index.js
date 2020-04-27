@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import Notifier from './Component/Notifier';
 
@@ -17,14 +18,16 @@ import App from './App';
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <Provider store={store}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <SnackbarProvider>
-          <Notifier />
-          <App />
-        </SnackbarProvider>
-      </MuiPickersUtilsProvider>
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <SnackbarProvider>
+            <Notifier />
+            <App />
+          </SnackbarProvider>
+        </MuiPickersUtilsProvider>
+      </Provider>
+    </Router>
   </ThemeProvider>,
   document.getElementById('root')
 );

@@ -8,8 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { DatePicker } from '@material-ui/pickers';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import format from 'date-fns/format';
-import appConfig from '../../appConfig';
-import { addEditRow, clearAddEditRow } from '../../actionCreator';
+import appConfig from '../../../appConfig';
+import { addEditRow, clearAddEditRow } from '../../../actionCreator';
 
 const useStyle = makeStyles(theme => ({
   root: {

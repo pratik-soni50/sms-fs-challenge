@@ -65,9 +65,8 @@ File must be in same format that givan in Challenge
 - Create/Update Item form
 - Delete Item functionality
 - Notification
+- Material UI
 
 ## Upcoming Features
 - Configurable Port
-- Updated Validation
-- UI Changes
-- Better Error Handling
+- Enhance Monorepo
