@@ -64,9 +64,9 @@ File must be in same format that givan in Challenge
 - Sorteble List
 - Create/Update Item form
 - Delete Item functionality
+- Notification
 
 ## Upcoming Features
 - Configurable Port
 - Updated Validation
 - UI Changes
-- Notification
