@@ -7,6 +7,11 @@ MongoDB
 
 In mongoDB you need specify Schema in api/config/env.js
 
+## Setup
+```
+git clone https://github.com/pratik-soni50/sms-fs-challenge.git && cd sms-fs-challenge
+```
+
 ## Install Dependancy:
 ```
 npm run install-all
