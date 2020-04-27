@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import MenuItem from '@material-ui/core/MenuItem';
 import { DatePicker } from '@material-ui/pickers';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import format from 'date-fns/format';
 import appConfig from '../../appConfig';
 import { addEditRow, clearAddEditRow } from '../../actionCreator';
@@ -73,11 +74,13 @@ export default function DataForm() {
   return (
     <Paper className={classes.root}>
       <Typography variant="h5" component="h2">{`${item && item.id ? 'Edit' : 'Add'} Item`}</Typography>
-      <form onSubmit={handleSubmit}>
-        <TextField
+      <ValidatorForm onSubmit={handleSubmit}>
+        <TextValidator
           label="City"
           value={city}
           onChange={e => setCity(e.target.value)}
+          validators={['required', 'trim']}
+          errorMessages={['This field is required', 'Only Space not allowed']}
         />
         <DatePicker
           disableToolbar
@@ -89,6 +92,9 @@ export default function DataForm() {
           // maxDate={endDate}
           // maxDateMessage="Start Date should not after End Date"
           autoOk={true}
+          TextFieldComponent={TextValidator}
+          validators={['required']}
+          errorMessages={['This field is required']}
         />
         <DatePicker
           disableToolbar
@@ -100,25 +106,37 @@ export default function DataForm() {
           minDate={startDate}
           minDateMessage="End Date should not aefore Start Date"
           autoOk={true}
+          TextFieldComponent={TextValidator}
+          validators={['required']}
+          errorMessages={['This field is required']}
         />
-        <TextField
+        <TextValidator
           label="Price"
           value={price}
           onChange={e => setPrice(e.target.value)}
+          validators={['required', 'isFloat', 'isPositive']}
+          errorMessages={['This field is required', 'Only number allowed', 'Only positive allowed']}
         />
-        <TextField
-          label="Status"
+        <TextValidator
+          select
           value={status}
           onChange={e => setStatus(e.target.value)}
-        />
-        <TextField
+          label="Status"
+          validators={['required']}
+          errorMessages={['This field is required']}
+        >
+          {appConfig.STATUS_ARRAY.map(value => <MenuItem key={value} value={value}>{value}</MenuItem>)}
+        </TextValidator>
+        <TextValidator
           label="Color"
           value={color}
           onChange={e => setColor(e.target.value)}
+          validators={['required']}
+          errorMessages={['This field is required']}
         />
         <Button disabled={loading} type="submit">Submit</Button>
         <Button type="button" color="secondary" className={classes.cancelButton} onClick={clearForm}>Cancel</Button>
-      </form>
+      </ValidatorForm>
     </Paper>
   )
 }
