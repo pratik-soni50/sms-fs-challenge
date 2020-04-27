@@ -5,7 +5,7 @@ import { listItems, getItem, insertItem, updateItem, deleteitem } from '../contr
 const dataRouter = Router();
 
 const handleInternalServerError = (req, res) => {
-  res.status(500).json({ error: ['Internal Server Error'] });
+  res.status(500).json({ error: ['Internal Server Error'], status: false});
 }
 
 dataRouter.get('/', async ({ query }, res) => {
@@ -18,7 +18,7 @@ dataRouter.get('/', async ({ query }, res) => {
 
 dataRouter.get('/:id', validateID, checkValidation, async ({ params: { id } }, res, next) => {
   try {
-    res.json(await getItem(id));
+    res.json({result: await getItem(id), status: true});
   } catch  {
     next();
   }
@@ -26,7 +26,7 @@ dataRouter.get('/:id', validateID, checkValidation, async ({ params: { id } }, r
 
 dataRouter.post('/', validateData, checkValidation, async ({ body }, res, next) => {
   try {
-    res.json(await insertItem(body))
+    res.json({result: await insertItem(body), status: true});
   } catch {
     next();
   }
@@ -34,7 +34,7 @@ dataRouter.post('/', validateData, checkValidation, async ({ body }, res, next) 
 
 dataRouter.put('/:id', validateID, validateData, checkValidation, async ({ params: { id }, body }, res, next) => {
   try {
-    res.json(await updateItem(id, body));
+    res.json({result: await updateItem(id, body), status: true});
   } catch {
     next();
   }
@@ -42,7 +42,7 @@ dataRouter.put('/:id', validateID, validateData, checkValidation, async ({ param
 
 dataRouter.delete('/:id', validateID, checkValidation, async ({ params: { id } }, res, next) => {
   try {
-    res.json(await deleteitem(id));
+    res.json({result: await deleteitem(id), status: true});
   } catch {
     next();
   }
