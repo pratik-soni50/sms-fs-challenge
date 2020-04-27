@@ -50,7 +50,11 @@ By this UI will run on port 8000
 
 ## Seed Data
 ```
-npm run seed --<json file relative path>
+cd api
+```
+then
+```
+npm run seed -- <json file relative path>
 ```
 File must be in same format that givan in Challenge
 

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import appConfig from '../appConfig';
-import { rowAddedEdited } from '../actionCreator';
+import { rowAddedEdited, errorNotification, sucessNotification } from '../actionCreator';
 
 export default function* addEditRowSaga({ payload }) {
   try {
@@ -13,13 +13,13 @@ export default function* addEditRowSaga({ payload }) {
     const { status, error, result } = data;
     yield put(rowAddedEdited({ error, result }));
     if (status) {
-      // @TODO: Show notification
+      yield put(sucessNotification(`Data submited successfully`));
     } else {
-      // @TODO: Show notification
+      yield put(errorNotification('Server Error'));
     }
   } catch (e) {
     yield put(rowAddedEdited({ error: 'Server Error' }));
-    // @TODO: Show notification
+    yield put(errorNotification('Server Error'));
     console.error(e);
   }
 }

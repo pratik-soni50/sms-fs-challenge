@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import appConfig from '../appConfig';
-import { rowsReceived } from '../actionCreator';
+import { rowsReceived, errorNotification, sucessNotification } from '../actionCreator';
 
 export default function* getRowsSaga(action) {
   try {
@@ -9,13 +9,13 @@ export default function* getRowsSaga(action) {
     const { status, error, result } = data;
     yield put(rowsReceived({ error, result }));
     if (status) {
-      // @TODO: Show notification
+      yield put(sucessNotification('Data recieved Successfully'));
     } else {
-      // @TODO: Show notification
+      yield put(errorNotification('Found some issues in recieving data'));
     }
   } catch (e) {
     yield put(rowsReceived({ error: 'Server Error' }));
-    // @TODO: Show notification
+    yield put(errorNotification('Server Error'));
     console.error(e);
   }
 }

@@ -15,7 +15,6 @@
     "start-build": "npm run start-build-api && npm run start-build-ui",
     "start-build-api": "cd ./api && npm run start-build",
     "start-build-ui": "cd ./front && npm run start-build",
-    "seed": "npx babel-node ./seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
