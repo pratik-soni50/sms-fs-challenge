@@ -9,6 +9,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import { DatePicker } from '@material-ui/pickers';
 
 import DataTableHead from './DataTableHead';
@@ -40,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
   filter: {
     padding: theme.spacing(2),
+  },
+  grow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 }));
 
@@ -81,10 +87,21 @@ export default function DataTable() {
     setPage(0);
   };
 
+  const resetFilters = () => {
+    setMinStart(null);
+    setMaxStart(null);
+    setMinEnd(null);
+    setMaxEnd(null);
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container className={classes.filter} spacing={2}>
+          <Grid item xs={12} className={classes.grow}>
+            Filters:
+            <Button onClick={resetFilters}>Reset Filters</Button>
+          </Grid>
           <Grid item xs={6}>
             <DatePicker
               disableToolbar
