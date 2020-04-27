@@ -1,15 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
-import mongoose from 'mongoose';
+import setupDatabase from './utils/setUpDatabase';
 import dataRouter from './router/Data';
 
 const startServer = async () => {
-  await mongoose.connect('mongodb://localhost:27017/account', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-  });
+  await setupDatabase();
 
   const app = express();
   app.use(cors());
