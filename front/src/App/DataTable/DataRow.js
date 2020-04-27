@@ -1,14 +1,17 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import appConfig from '../../appConfig';
-import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { setEditData } from '../../actionCreator';
+import { setEditData, deleteRow } from '../../actionCreator';
 
 export default function DataRow({ row }) {
   const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.deleteRow);
   return (
     <TableRow hover tabIndex={-1}>
       <TableCell>{row.city}</TableCell>
@@ -18,8 +21,22 @@ export default function DataRow({ row }) {
       <TableCell>{row.status}</TableCell>
       <TableCell>{row.color}</TableCell>
       <TableCell align="center">
-        <Button onClick={() => { dispatch(setEditData(row)) }}>Edit</Button>
-        <Button>Delete</Button>
+        <IconButton
+          color="primary"
+          size="small"
+          onClick={() => { dispatch(setEditData(row)) }}
+        >
+          <EditIcon fontSize="small" />
+        </IconButton>
+        <IconButton
+          color="secondary"
+          aria-label="delete"
+          size="small"
+          disabled={loading}
+          onClick={() => { dispatch(deleteRow(row.id)) }}
+        >
+          <DeleteIcon fontSize="small" />
+        </IconButton>
       </TableCell>
     </TableRow>
   );

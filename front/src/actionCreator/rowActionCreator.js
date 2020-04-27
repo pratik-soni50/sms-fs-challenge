@@ -30,12 +30,25 @@ export const rowAddedEdited = payload => ({
   payload,
 });
 
-export const clearAddEditRow = payload => ({
+export const clearAddEditRow = () => ({
   type: ACTIONS.CLEAR_ADD_EDIT_ROW,
-  payload,
 });
 
 export const setEditData = payload => ({
   type: ACTIONS.SET_EDIT_DATA,
   payload,
+});
+
+export const rowDeleted = payload => ({
+  type: ACTIONS.ROW_DELETED,
+  payload,
+});
+
+export const deleteRow = payload => ({
+  type: ACTIONS.DELETE_ROW,
+  payload,
+});
+
+export const clearDeleteRow = () => ({
+  type: ACTIONS.CLEAR_DELETE_ROW,
 });

@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 
 import DataTableHead from './DataTableHead';
 import DataRow from './DataRow';
-import { getRows } from '../../actionCreator';
+import { getRows, clearDeleteRow } from '../../actionCreator';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +42,7 @@ export default function DataTable() {
   const dispatch = useDispatch();
   const { data, count, loading } = useSelector(state => state.getRows);
   const { result } = useSelector(state => state.addEditRow);
+  const { result: deleteResult } = useSelector(state => state.deleteRow);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [page, setPage] = React.useState(0);
@@ -49,7 +50,11 @@ export default function DataTable() {
 
   useEffect(() => {
     !loading && dispatch(getRows({ page: page + 1, perPage, order, orderBy }));
-  }, [order, orderBy, page, perPage, result]);
+  }, [order, orderBy, page, perPage, result, deleteResult]);
+
+  useEffect(() => {
+    deleteResult && dispatch(clearDeleteRow());
+  }, [deleteResult]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

@@ -14,6 +14,9 @@ const useStyle = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2),
   },
+  cancelButton: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export default function DataForm() {
@@ -40,6 +43,16 @@ export default function DataForm() {
     }));
   }
 
+  const clearForm = () => {
+    setCity('');
+    setStartDate(null);
+    setEndDate(null);
+    setPrice('');
+    setStatus('');
+    setColor('');
+    dispatch(clearAddEditRow());
+  }
+
   useEffect(() => {
     if (item) {
       setCity(item.city || '');
@@ -53,13 +66,7 @@ export default function DataForm() {
 
   useEffect(() => {
     if (result && (result.id || item.id)) {
-      setCity('');
-      setStartDate(null);
-      setEndDate(null);
-      setPrice('');
-      setStatus('');
-      setColor('');
-      dispatch(clearAddEditRow());
+      clearForm();
     }
   }, [result]);
 
@@ -110,6 +117,7 @@ export default function DataForm() {
           onChange={e => setColor(e.target.value)}
         />
         <Button disabled={loading} type="submit">Submit</Button>
+        <Button type="button" color="secondary" className={classes.cancelButton} onClick={clearForm}>Cancel</Button>
       </form>
     </Paper>
   )
