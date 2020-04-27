@@ -70,3 +70,4 @@ File must be in same format that givan in Challenge
 - Configurable Port
 - Updated Validation
 - UI Changes
+- Better Error Handling

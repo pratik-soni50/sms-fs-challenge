@@ -8,10 +8,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { DatePicker } from '@material-ui/pickers';
 
 import DataTableHead from './DataTableHead';
 import DataRow from './DataRow';
 import { getRows, clearDeleteRow } from '../../actionCreator';
+import appConfig from '../../appConfig';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  filter: {
+    padding: theme.spacing(2),
+  },
 }));
 
 export default function DataTable() {
@@ -47,10 +53,14 @@ export default function DataTable() {
   const [orderBy, setOrderBy] = React.useState('id');
   const [page, setPage] = React.useState(0);
   const [perPage, setperPage] = React.useState(10);
+  const [minStart, setMinStart] = React.useState(null);
+  const [maxStart, setMaxStart] = React.useState(null);
+  const [minEnd, setMinEnd] = React.useState(null);
+  const [maxEnd, setMaxEnd] = React.useState(null);
 
   useEffect(() => {
-    !loading && dispatch(getRows({ page: page + 1, perPage, order, orderBy }));
-  }, [order, orderBy, page, perPage, result, deleteResult]);
+    !loading && dispatch(getRows({ page: page + 1, perPage, order, orderBy, minStart, maxStart, minEnd, maxEnd }));
+  }, [order, orderBy, page, perPage, result, deleteResult, minStart, maxStart, minEnd, maxEnd]);
 
   useEffect(() => {
     deleteResult && dispatch(clearDeleteRow());
@@ -74,6 +84,52 @@ export default function DataTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+        <Grid container className={classes.filter} spacing={2}>
+          <Grid item xs={6}>
+            <DatePicker
+              disableToolbar
+              variant="inline"
+              format={appConfig.DATE_FORMAT}
+              label="Min Start Date"
+              value={minStart}
+              onChange={setMinStart}
+              autoOk={true}
+            />
+            <DatePicker
+              disableToolbar
+              variant="inline"
+              format={appConfig.DATE_FORMAT}
+              label="Max Start Date"
+              value={maxStart}
+              onChange={setMaxStart}
+              maxDate={minStart}
+              maxDateMessage="Max Date should not before min Date"
+              autoOk={true}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <DatePicker
+              disableToolbar
+              variant="inline"
+              format={appConfig.DATE_FORMAT}
+              label="Min End Date"
+              value={minEnd}
+              onChange={setMinEnd}
+              autoOk={true}
+            />
+            <DatePicker
+              disableToolbar
+              variant="inline"
+              format={appConfig.DATE_FORMAT}
+              label="Max End Date"
+              value={maxEnd}
+              onChange={setMaxEnd}
+              maxDate={minEnd}
+              maxDateMessage="Max Date should not before min Date"
+              autoOk={true}
+            />
+          </Grid>
+        </Grid>
         <TableContainer>
           <Table
             className={classes.table}

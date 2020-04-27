@@ -7,11 +7,27 @@ const getNextID = async () => {
   }
 };
 
-export const listItems = async ({ page = 1, perPage = 10, order = 'asc', orderBy = 'id' }) => ({
-  items: await DataModel.find().limit(Number(perPage)).skip((page - 1) * perPage)
-    .sort({ [orderBy]: (order === 'asc' ? 1 : -1) }),
-  count: await DataModel.countDocuments(),
-});
+export const listItems = async ({
+  page = 1, perPage = 10, order = 'asc',
+  orderBy = 'id', minStart, maxStart, minEnd, maxEnd,
+}) => {
+  const query = {};
+  if (minStart || maxStart) {
+    query.start_date = {};
+    minStart && (query.start_date['$gte'] = new Date(minStart));
+    maxStart && (query.start_date['$lt'] = new Date(maxStart));
+  }
+  if(minEnd || maxEnd) {
+    query.end_date = {};
+    minEnd && (query.end_date['$gte'] = new Date(minEnd));
+    maxEnd && (query.end_date['$lt'] = new Date(maxEnd));
+  }
+  return ({
+    items: await DataModel.find(query).limit(Number(perPage)).skip((page - 1) * perPage)
+      .sort({ [orderBy]: (order === 'asc' ? 1 : -1) }),
+    count: await DataModel.countDocuments(),
+  })
+};
 
 export const getItem = async (id) => {
   return await DataModel.findOne({ id });
