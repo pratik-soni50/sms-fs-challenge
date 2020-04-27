@@ -73,6 +73,7 @@ export default function DataForm() {
 
   useEffect(() => {
     ValidatorForm.addValidationRule('requiredTrim', value => !(value && !value.trim()));
+    ValidatorForm.addValidationRule('color', value => (/^#([0-9a-f]{6}|[0-9a-f]{3})$/gmi).test(value));
     return () => {
       ValidatorForm.removeValidationRule('requiredTrim');
     }
@@ -87,7 +88,7 @@ export default function DataForm() {
           value={city}
           onChange={e => setCity(e.target.value)}
           validators={['required', 'requiredTrim']}
-          errorMessages={['This field is required', 'Should have alphbate']}
+          errorMessages={['This field is required', 'Should have alphabet']}
         />
         <DatePicker
           disableToolbar
@@ -138,8 +139,8 @@ export default function DataForm() {
           label="Color"
           value={color}
           onChange={e => setColor(e.target.value)}
-          validators={['required']}
-          errorMessages={['This field is required']}
+          validators={['required', 'requiredTrim', 'color']}
+          errorMessages={['This field is required', 'Should have alphabet', 'Should have valid hex color value']}
         />
         <Button disabled={loading} type="submit">Submit</Button>
         <Button type="button" color="secondary" className={classes.cancelButton} onClick={clearForm}>Cancel</Button>

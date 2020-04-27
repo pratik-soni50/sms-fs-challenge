@@ -14,7 +14,7 @@ export const dateValidator = value => {
 export const validateData = [
   check('city').trim()
     .notEmpty().withMessage('City can not be empty')
-    .isString().withMessage('City should be alphanumerical'),
+    .isString().withMessage('City should be alphanumeric'),
   check('start_date').trim()
     .custom(dateValidator).withMessage('Start Date should be in M/d/yyyy format'),
   check('end_date').trim()
@@ -25,7 +25,7 @@ export const validateData = [
   check('status').trim()
     .isIn(statusEnum).withMessage('Status should have in proper format'),
   check('color').trim()
-    .isString().withMessage('City should be alphanumerical'),
+    .isString().withMessage('Color should be alphanumeric'),
 ];
 
 export const checkValidation = (req, res, next) => {
