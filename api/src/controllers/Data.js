@@ -25,7 +25,7 @@ export const listItems = async ({
   return ({
     items: await DataModel.find(query).limit(Number(perPage)).skip((page - 1) * perPage)
       .sort({ [orderBy]: (order === 'asc' ? 1 : -1) }),
-    count: await DataModel.countDocuments(),
+    count: await DataModel.find(query).countDocuments(),
   })
 };
 

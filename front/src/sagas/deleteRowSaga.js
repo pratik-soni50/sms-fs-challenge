@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import appConfig from '../appConfig';
 import { rowDeleted, errorNotification, sucessNotification } from '../actionCreator';
+import parseMessage from '../utils/parseMessage';
 
 export default function* deleteRowSaga({ payload }) {
   try {
@@ -11,10 +12,12 @@ export default function* deleteRowSaga({ payload }) {
     );
     const { status, error, result } = data;
     yield put(rowDeleted({ error, result }));
-    if (status) {
+    if (error) {
+      yield put(errorNotification(parseMessage(error)));
+    } else if (status) {
       yield put(sucessNotification('Item deleted successfully'));
     } else {
-      yield put(errorNotification('Some issues in deleting data'));
+      yield put(errorNotification('Somthing went wrong, Please try again'));
     }
   } catch (e) {
     yield put(rowDeleted({ error: 'Server Error' }));

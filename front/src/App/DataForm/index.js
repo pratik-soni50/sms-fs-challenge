@@ -71,6 +71,13 @@ export default function DataForm() {
     }
   }, [result]);
 
+  useEffect(() => {
+    ValidatorForm.addValidationRule('requiredTrim', value => !(value && !value.trim()));
+    return () => {
+      ValidatorForm.removeValidationRule('requiredTrim');
+    }
+  }, []);
+
   return (
     <Paper className={classes.root}>
       <Typography variant="h5" component="h2">{`${item && item.id ? 'Edit' : 'Add'} Item`}</Typography>
@@ -79,8 +86,8 @@ export default function DataForm() {
           label="City"
           value={city}
           onChange={e => setCity(e.target.value)}
-          validators={['required']}
-          errorMessages={['This field is required']}
+          validators={['required', 'requiredTrim']}
+          errorMessages={['This field is required', 'Should have alphbate']}
         />
         <DatePicker
           disableToolbar

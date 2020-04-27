@@ -12,18 +12,27 @@ export const dateValidator = value => {
 };
 
 export const validateData = [
-  check('city').isString().trim(),
-  check('start_date').custom(dateValidator),
-  check('end_date').custom(dateValidator),
-  check('price').isNumeric().trim(),
-  check('status').trim().isIn(statusEnum),
-  check('color').isString().trim(),
+  check('city').trim()
+    .notEmpty().withMessage('City can not be empty')
+    .isString().withMessage('City should be alphanumerical'),
+  check('start_date').trim()
+    .custom(dateValidator).withMessage('Start Date should be in M/d/yyyy format'),
+  check('end_date').trim()
+    .custom(dateValidator).withMessage('End Date should be in M/d/yyyy format'),
+  check('price').trim()
+    .notEmpty().withMessage('Price can not be empty')
+    .isNumeric().withMessage('Price should be a Number'),
+  check('status').trim()
+    .isIn(statusEnum).withMessage('Status should have in proper format'),
+  check('color').trim()
+    .isString().withMessage('City should be alphanumerical'),
 ];
 
 export const checkValidation = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ error: errors.array() });
+    const resolvedError = errors.array().map(i => i.msg);
+    return res.json({ error: resolvedError, status: false });
   }
   next();
 }

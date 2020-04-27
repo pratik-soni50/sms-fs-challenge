@@ -15,19 +15,17 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Provider store={store}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <SnackbarProvider>
-            <Notifier />
-            <App />
-          </SnackbarProvider>
-        </MuiPickersUtilsProvider>
-      </Provider>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Provider store={store}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <SnackbarProvider>
+          <Notifier />
+          <App />
+        </SnackbarProvider>
+      </MuiPickersUtilsProvider>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
